@@ -1,5 +1,7 @@
 ﻿using System;
 using tabuleiro;
+using xadrez;
+
 namespace Xadrex_console
 {
     class Tela
@@ -25,6 +27,16 @@ namespace Xadrex_console
                 Console.WriteLine();
             }
             Console.WriteLine("  a b c d e f g h");
+        }
+
+
+        public static PosicaoXadrez lerPosicaoXadrez()
+        {
+            string s = Console.ReadLine();
+            char coluna = s[0];
+            int linha = int.Parse(s[1] + ""); //forcar a ser string
+            return new PosicaoXadrez(coluna, linha);
+
         }
 
 
