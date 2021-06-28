@@ -21,6 +21,30 @@
             qteMovimentos++;
         }
 
+        public bool existeMovimentosPossiveis()
+        {
+            bool[,] mat = movimentosPossiveis();
+
+            for (int contador = 0; contador < tab.linhas; contador++)
+            {
+                for (int contador2 = 0; contador2 < tab.colunas; contador2++)
+                {
+                    if (mat[contador, contador2]) //se verdadeiro
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public bool podeMoverPara(Posicao pos)
+        {
+            return movimentosPossiveis()[pos.linha, pos.coluna];
+        }
+
+
+
         public abstract bool[,] movimentosPossiveis(); //nao tem implementacao pq é abstrato
 
     }
