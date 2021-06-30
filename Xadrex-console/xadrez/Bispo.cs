@@ -49,10 +49,10 @@ namespace xadrez
                 {
                     break;
                 }
-                pos.definirValores(pos.linha - 1, pos.coluna - 1);
+                pos.definirValores(pos.linha - 1, pos.coluna + 1);
             }
             //sudeste
-            pos.definirValores(posicao.linha + 1, posicao.coluna - 1);
+            pos.definirValores(posicao.linha + 1, posicao.coluna + 1);
             while (tab.posicaoValida(pos) && podeMover(pos))
             {
                 mat[pos.linha, pos.coluna] = true;
@@ -60,7 +60,7 @@ namespace xadrez
                 {
                     break;
                 }
-                pos.definirValores(pos.linha - 1, pos.coluna - 1);
+                pos.definirValores(pos.linha + 1, pos.coluna + 1);
             }
 
             //sudoeste
@@ -72,7 +72,7 @@ namespace xadrez
                 {
                     break;
                 }
-                pos.definirValores(pos.linha - 1, pos.coluna - 1);
+                pos.definirValores(pos.linha + 1, pos.coluna - 1);
             }
 
 
