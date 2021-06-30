@@ -69,8 +69,16 @@ namespace xadrez
                 xeque = false;
             }
 
-            turno++;
-            mudaJogador();
+            if (testeXequemate(adversaria(jogadorAtual)))
+            {
+                terminada = true;
+            }
+            else
+            {
+                turno++;
+                mudaJogador();
+            }
+
         }
 
         public void validarPosicaoDeOrigem(Posicao pos)
@@ -94,7 +102,7 @@ namespace xadrez
 
         public void validarPosicaoDeOrigem(Posicao origem, Posicao destino)
         {
-            if (!tab.peca(origem).podeMoverPara(destino))
+            if (!tab.peca(origem).movimentoPossivelPara(destino))
             {
                 throw new TabuleiroException("Posição de destino inválida!");
             }
@@ -183,6 +191,37 @@ namespace xadrez
                 }
             }
             return false;
+        }
+
+        public bool testeXequemate(Cor cor)
+        {
+            if (!estaEmXeque(cor))
+            {
+                return false;
+            }
+
+            foreach (Peca x in pecasEmJogo(cor))
+            {
+                bool[,] mat = x.movimentosPossiveis();
+                for (int count = 0; count < tab.linhas; count++)
+                {
+                    for (int count2 = 0; count2 < tab.colunas; count2++)
+                    {
+                        if (mat[count, count2])
+                        {
+                            Posicao destino = new Posicao(count, count2);
+                            Peca pecaCapturada = executaMovimento(x.posicao, destino);
+                            bool testeXeque = estaEmXeque(cor);
+                            desfazMovimento(x.posicao, destino, pecaCapturada);
+                            if (!testeXeque)
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
         }
 
         public void colocarNovaPeca(char coluna, int linha, Peca peca)

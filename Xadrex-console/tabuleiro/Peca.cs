@@ -43,7 +43,7 @@
             return false;
         }
 
-        public bool podeMoverPara(Posicao pos)
+        public bool movimentoPossivelPara(Posicao pos)
         {
             return movimentosPossiveis()[pos.linha, pos.coluna];
         }
